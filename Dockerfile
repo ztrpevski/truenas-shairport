@@ -29,7 +29,6 @@ RUN git clone https://github.com/mikebrady/shairport-sync.git && \
         --with-dbus-interface \
         --with-mpris-interface \
         --with-mqtt-client \
-        --with-apple-alac \
         --with-convolution \
         --with-airplay-2 \
         --with-sysnice \
