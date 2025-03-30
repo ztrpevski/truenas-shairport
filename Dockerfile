@@ -1,4 +1,4 @@
-FROM shairport-sync:latest
+FROM debian:bullseye-slim
 
 # Update and install dependencies
 RUN apt-get update -y && apt-get install -y \
