@@ -4,7 +4,7 @@ FROM debian:bullseye-slim
 RUN apt-get update -y && apt-get install -y \
     build-essential git autoconf automake libtool \
     libpopt-dev libasound2-dev libavahi-client-dev \
-    libmbedtls-dev libsoxr-dev libconfig-dev \
+    libmbedtls-dev libsoxr-dev libconfig-dev nqptp\
     libpulse-dev libmosquitto-dev libgstreamer1.0-dev \
     libglib2.0-dev libdbus-1-dev libplist-dev\
     alsa-utils libsndfile1-dev vim xxd  libsodium-dev libgcrypt-dev\
