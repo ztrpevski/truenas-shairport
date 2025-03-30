@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM ubuntu:latest
 
 # Update and install dependencies
 RUN apt-get update -y && apt-get install -y \
