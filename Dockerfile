@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-# Install dependencies
+# Update and install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential git autoconf automake libtool \
     popt-dev libasound2-dev libavahi-client-dev \
@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-dev libdbus-1-dev \
     alsa-utils alsa-plugins \
     ffmpeg libavcodec-dev libavformat-dev \
-    libalac-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Clone Shairport Sync source
 WORKDIR /usr/src
