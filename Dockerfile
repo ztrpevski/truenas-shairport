@@ -30,7 +30,7 @@ RUN git clone https://github.com/mikebrady/shairport-sync.git && \
         --with-mpris-interface \
         --with-mqtt-client \
         --with-convolution \
-        --with-airplay-2 \
+      #  --with-airplay-2 \
         --with-sysnice \
 #        --with-apple-alac \
     && make -j$(nproc) && \
