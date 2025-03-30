@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM shairport-sync:latest
 
 # Update and install dependencies
 RUN apt-get update -y && apt-get install -y \
