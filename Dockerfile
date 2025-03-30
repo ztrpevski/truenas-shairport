@@ -32,7 +32,7 @@ RUN git clone https://github.com/mikebrady/shairport-sync.git && \
         --with-convolution \
         --with-airplay-2 \
         --with-sysnice \
-        --with-apple-alac \
+#        --with-apple-alac \
     && make -j$(nproc) && \
     make install && \
     ldconfig
