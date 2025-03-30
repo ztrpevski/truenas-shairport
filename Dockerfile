@@ -1,28 +1,19 @@
-FROM alpine:latest
+FROM debian:bullseye-slim
 
 # Install dependencies
-RUN apk add --no-cache \
-    build-base git autoconf automake libtool \
-    popt-dev alsa-lib-dev avahi-dev \
-    mbedtls-dev soxr-dev libconfig-dev \
-    pulseaudio-dev mosquitto-dev gstreamer-dev \
-    glib-dev dbus dbus-dev avahi \
+RUN apt-get update && apt-get install -y \
+    build-essential git autoconf automake libtool \
+    popt-dev libasound2-dev libavahi-client-dev \
+    libmbedtls-dev libsoxr-dev libconfig-dev \
+    libpulse-dev libmosquitto-dev libgstreamer1.0-dev \
+    libglib2.0-dev libdbus-1-dev \
     alsa-utils alsa-plugins \
-    ffmpeg-dev \
-    && rm -rf /var/cache/apk/*
-
-# Build and install ALAC from source
-WORKDIR /usr/src
-RUN git clone https://github.com/mikebrady/alac.git && \
-    cd alac && \
-    autoreconf -i -f && \
-    ./configure && \
-    make -j$(nproc) && \
-    make install && \
-    ldconfig && \
-    cd .. && rm -rf alac
+    ffmpeg libavcodec-dev libavformat-dev \
+    libalac-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Clone Shairport Sync source
+WORKDIR /usr/src
 RUN git clone https://github.com/mikebrady/shairport-sync.git && \
     cd shairport-sync && \
     autoreconf -i -f && \
