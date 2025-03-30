@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     pulseaudio-dev mosquitto-dev gstreamer-dev \
     glib-dev dbus dbus-dev avahi \
     alsa-utils alsa-plugins \
-    ffmpeg-dev alac-decoder \
+    ffmpeg-dev libalac-dev \
     && rm -rf /var/cache/apk/*
 
 # Clone Shairport Sync source
