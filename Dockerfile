@@ -8,11 +8,21 @@ RUN apk add --no-cache \
     pulseaudio-dev mosquitto-dev gstreamer-dev \
     glib-dev dbus dbus-dev avahi \
     alsa-utils alsa-plugins \
-    ffmpeg-dev libalac-dev \
+    ffmpeg-dev \
     && rm -rf /var/cache/apk/*
 
-# Clone Shairport Sync source
+# Build and install ALAC from source
 WORKDIR /usr/src
+RUN git clone https://github.com/mikebrady/alac.git && \
+    cd alac && \
+    autoreconf -i -f && \
+    ./configure && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig && \
+    cd .. && rm -rf alac
+
+# Clone Shairport Sync source
 RUN git clone https://github.com/mikebrady/shairport-sync.git && \
     cd shairport-sync && \
     autoreconf -i -f && \
