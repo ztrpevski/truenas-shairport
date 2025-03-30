@@ -6,7 +6,7 @@ RUN apt-get update -y && apt-get install -y \
     libpopt-dev libasound2-dev libavahi-client-dev \
     libmbedtls-dev libsoxr-dev libconfig-dev \
     libpulse-dev libmosquitto-dev libgstreamer1.0-dev \
-    libglib2.0-dev libdbus-1-dev \
+    libglib2.0-dev libdbus-1-dev libplist-dev\
     alsa-utils libsndfile1-dev vim xxd\
     ffmpeg libavcodec-dev libavformat-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
