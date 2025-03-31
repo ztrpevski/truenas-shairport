@@ -10,6 +10,9 @@ ENV S6_KEEP_ENV=1 \
 # Create necessary directories (for PulseAudio/PipeWire)
 RUN mkdir -p /tmp
 
+# Install alsa-utils for alsamixer
+RUN apt-get update && apt-get install -y alsa-utils && apt-get clean
+
 # Copy custom Shairport Sync configuration file (if you have one)
 COPY ./shairport-sync.conf /etc/shairport-sync.conf
 
@@ -24,4 +27,3 @@ EXPOSE 5000 6001 6002 6003
 
 # Command to run Shairport Sync
 CMD ["shairport-sync", "-v", "--name=Attic"]
-
