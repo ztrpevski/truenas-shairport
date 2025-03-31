@@ -1,5 +1,5 @@
 ARG NQPTP_BRANCH=main
-ARG SHAIRPORT_SYNC_BRANCH=master
+ARG SHAIRPORT_SYNC_BRANCH=development
 
 FROM alpine:3.20 AS builder
 
