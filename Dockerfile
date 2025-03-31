@@ -1,5 +1,5 @@
 ARG NQPTP_BRANCH=main
-ARG SHAIRPORT_SYNC_BRANCH=.
+ARG SHAIRPORT_SYNC_BRANCH=development
 
 FROM alpine:3.20 AS builder
 
@@ -55,7 +55,7 @@ ARG SHAIRPORT_SYNC_BRANCH
 
 WORKDIR /shairport-sync
 COPY . .
-RUN git checkout development
+RUN git clone --depth=1 -b "$SHAIRPORT_SYNC_BRANCH" https://github.com/mikebrady/shairport-sync
 WORKDIR /shairport-sync/build
 RUN autoreconf -i ../
 RUN CFLAGS="-O3" CXXFLAGS="-O3" ../configure --sysconfdir=/etc --with-alsa --with-pa --with-soxr --with-avahi --with-ssl=openssl \
