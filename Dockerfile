@@ -1,7 +1,7 @@
 ARG NQPTP_BRANCH=main
-ARG SHAIRPORT_SYNC_BRANCH=development
+ARG SHAIRPORT_SYNC_BRANCH=.
 
-FROM alpine:3.20 AS builder
+FROM alpine:latest AS builder
 
 RUN apk -U add \
         alsa-lib-dev \
@@ -55,7 +55,7 @@ ARG SHAIRPORT_SYNC_BRANCH
 
 WORKDIR /shairport-sync
 COPY . .
-RUN git checkout "$SHAIRPORT_SYNC_BRANCH"
+RUN git checkout development
 WORKDIR /shairport-sync/build
 RUN autoreconf -i ../
 RUN CFLAGS="-O3" CXXFLAGS="-O3" ../configure --sysconfdir=/etc --with-alsa --with-pa --with-soxr --with-avahi --with-ssl=openssl \
@@ -90,7 +90,7 @@ COPY --from=shairport-sync /shairport-sync/build/install/etc/dbus-1/system.d/sha
 ##### END BUILD FILES #####
 
 # Shairport Sync Runtime System
-FROM crazymax/alpine-s6:3.20-3.2.0.2
+FROM crazymax/alpine-s6:latest
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
