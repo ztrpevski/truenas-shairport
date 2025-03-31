@@ -71,9 +71,9 @@ WORKDIR /
 FROM scratch AS files
 
 # Add run script that will start SPS
-COPY --chmod=755 ./docker/run.sh ./run.sh
-COPY ./docker/etc/s6-overlay/s6-rc.d /etc/s6-overlay/s6-rc.d
-COPY ./docker/etc/pulse /etc/pulse
+COPY --chmod=755 ./run.sh ./run.sh
+COPY ./etc/s6-overlay/s6-rc.d /etc/s6-overlay/s6-rc.d
+COPY ./etc/pulse /etc/pulse
 ##### END STATIC FILES #####
 
 ##### BUILD FILES #####
