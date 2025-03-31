@@ -1,7 +1,7 @@
 ARG NQPTP_BRANCH=main
 ARG SHAIRPORT_SYNC_BRANCH=.
 
-FROM alpine:latest AS builder
+FROM alpine:3.20 AS builder
 
 RUN apk -U add \
         alsa-lib-dev \
@@ -90,7 +90,7 @@ COPY --from=shairport-sync /shairport-sync/build/install/etc/dbus-1/system.d/sha
 ##### END BUILD FILES #####
 
 # Shairport Sync Runtime System
-FROM crazymax/alpine-s6:latest
+FROM crazymax/alpine-s6:3.20-3.2.0.2
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
