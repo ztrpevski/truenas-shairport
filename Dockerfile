@@ -20,4 +20,4 @@ VOLUME ["/dev/snd"]
 # EXPOSE 5000 6001
 
 # Command to run Shairport Sync (modify output backend as needed)
-CMD ["shairport-sync"]
+CMD ["shairport-sync -v --name=MyShairport --output=alsa"]
