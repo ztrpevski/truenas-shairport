@@ -1,19 +1,28 @@
-FROM debian:bullseye-slim
+FROM alpine:latest
 
-# Update and install dependencies
-RUN apt-get update -y && apt-get install -y \
-    build-essential git autoconf automake libtool \
-    libpopt-dev libasound2-dev libavahi-client-dev \
-    libmbedtls-dev libsoxr-dev libconfig-dev \
-    libpulse-dev libmosquitto-dev libgstreamer1.0-dev \
-    libglib2.0-dev libdbus-1-dev libplist-dev\
-    alsa-utils libsndfile1-dev vim xxd  libsodium-dev libgcrypt-dev\
-    ffmpeg libavcodec-dev libavformat-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && echo "Installed packages successfully"
+# Install dependencies
+RUN apk add --no-cache \
+    build-base git autoconf automake libtool \
+    popt-dev alsa-lib-dev avahi-dev \
+    mbedtls-dev soxr-dev libconfig-dev \
+    pulseaudio-dev mosquitto-dev gstreamer-dev \
+    glib-dev dbus dbus-dev avahi \
+    alsa-utils alsa-plugins \
+    ffmpeg-dev \
+    && rm -rf /var/cache/apk/*
+
+# Build and install ALAC from source
+WORKDIR /usr/src
+RUN git clone https://github.com/mikebrady/alac.git && \
+    cd alac && \
+    autoreconf -i -f && \
+    ./configure && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig && \
+    cd .. && rm -rf alac
 
 # Clone Shairport Sync source
-WORKDIR /usr/src
 RUN git clone https://github.com/mikebrady/shairport-sync.git && \
     cd shairport-sync && \
     autoreconf -i -f && \
@@ -29,10 +38,10 @@ RUN git clone https://github.com/mikebrady/shairport-sync.git && \
         --with-dbus-interface \
         --with-mpris-interface \
         --with-mqtt-client \
+        --with-apple-alac \
         --with-convolution \
-      #  --with-airplay-2 \
+        --with-airplay-2 \
         --with-sysnice \
-#        --with-apple-alac \
     && make -j$(nproc) && \
     make install && \
     ldconfig
