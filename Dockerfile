@@ -23,5 +23,5 @@ VOLUME ["/dev/snd"]
 EXPOSE 5000 6001 6002 6003
 
 # Command to run Shairport Sync
-CMD ["shairport-sync", "-v", "--name=Attic", "--device /dev/snd"]
+CMD ["shairport-sync", "-v", "--name=Attic"]
 
