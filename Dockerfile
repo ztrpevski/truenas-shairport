@@ -10,8 +10,8 @@ ENV S6_KEEP_ENV=1 \
 # Create necessary directories (for PulseAudio/PipeWire)
 RUN mkdir -p /tmp
 
-# Install alsa-utils for alsamixer
-RUN apt-get update && apt-get install -y alsa-utils && apt-get clean
+# Install alsa-utils for alsamixer (using apk for Alpine Linux)
+RUN apk add --no-cache alsa-utils
 
 # Copy custom Shairport Sync configuration file (if you have one)
 COPY ./shairport-sync.conf /etc/shairport-sync.conf
