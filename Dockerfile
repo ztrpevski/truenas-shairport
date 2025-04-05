@@ -11,8 +11,8 @@ ENV S6_KEEP_ENV=1 \
 RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
-RUN apk add --no-cache alsa-utils alsaconf &&\
-        pulseaudio pulseaudio-alsa alsa-plugins-pulse &&\
+RUN apk add --no-cache alsa-utils alsaconf \
+        pulseaudio pulseaudio-alsa alsa-plugins-pulse \
         pulseaudio-utils pulseaudio-bluez
 
 RUN addgroup root audio
