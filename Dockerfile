@@ -24,4 +24,4 @@ COPY ./shairport-sync.conf /etc/shairport-sync.conf
 EXPOSE 5000 6001 6002 6003
 
 # Command to run Shairport Sync
-CMD ["shairport-sync", "-v", "--name=Attic",  "--", "-d" "surround51:PCH"]
+CMD ["shairport-sync", "-v", "--name=Attic"]
