@@ -6,7 +6,7 @@ FROM mikebrady/shairport-sync:latest
 RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
-RUN apk add --no-cache alsa-utils alsaconf 
+RUN apk add --no-cache alsa-utils alsaconf alsa-utils-doc alsa-lib
 
 RUN addgroup root audio
     
