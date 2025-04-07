@@ -1,19 +1,12 @@
 #  Use the official Shairport Sync image as the base
 FROM mikebrady/shairport-sync:latest
 
-# Set environment variables (uncomment if needed)
-ENV S6_KEEP_ENV=1 \
-    PULSE_SERVER=unix:/tmp/pulseaudio.socket \
-    PULSE_COOKIE=/tmp/pulseaudio.cookie \
-    XDG_RUNTIME_DIR=/tmp
 
 # Create necessary directories (for PulseAudio/PipeWire)
 RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
-RUN apk add --no-cache alsa-utils alsaconf \
-        pulseaudio pulseaudio-alsa alsa-plugins-pulse \
-        pulseaudio-utils 
+RUN apk add --no-cache alsa-utils alsaconf 
 
 #RUN addgroup root audio
     
