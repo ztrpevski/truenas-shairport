@@ -11,7 +11,7 @@ ENV S6_KEEP_ENV=1 \
 RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
-RUN apk add --no-cache alsa-utils alsaconf \
+RUN apk add --no-cache alsa-utils alsaconf 
 
 #RUN addgroup root audio
     
