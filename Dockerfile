@@ -12,8 +12,6 @@ RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
 RUN apk add --no-cache alsa-utils alsaconf \
-        pulseaudio pulseaudio-alsa alsa-plugins-pulse \
-        pulseaudio-utils 
 
 #RUN addgroup root audio
     
@@ -25,7 +23,7 @@ COPY ./shairport-sync.conf /etc/shairport-sync.conf
 #RUN mkdir -p /var/lib/alsa && touch /var/lib/alsa/asound.state
 
 # Grant access to ALSA sound device
-VOLUME ["/dev/snd"]
+#VOLUME ["/dev/snd"]
 
 # Expose ports
 EXPOSE 5000 6001 6002 6003
