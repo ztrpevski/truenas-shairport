@@ -1,4 +1,4 @@
-# Use the official Shairport Sync image as the base
+#  Use the official Shairport Sync image as the base
 FROM mikebrady/shairport-sync:latest
 
 # Set environment variables (uncomment if needed)
@@ -11,7 +11,9 @@ ENV S6_KEEP_ENV=1 \
 RUN mkdir -p /tmp
 
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
-#RUN apk add --no-cache alsa-utils alsaconf 
+RUN apk add --no-cache alsa-utils alsaconf \
+        pulseaudio pulseaudio-alsa alsa-plugins-pulse \
+        pulseaudio-utils 
 
 #RUN addgroup root audio
     
@@ -23,10 +25,10 @@ COPY ./shairport-sync.conf /etc/shairport-sync.conf
 #RUN mkdir -p /var/lib/alsa && touch /var/lib/alsa/asound.state
 
 # Grant access to ALSA sound device
-#VOLUME ["/dev/snd"]
+VOLUME ["/dev/snd"]
 
 # Expose ports
 EXPOSE 5000 6001 6002 6003
 
 # Command to run Shairport Sync
-CMD ["shairport-sync", "-v", "--name=Attic", "-o", "pulse"]
+CMD ["shairport-sync", "-v", "--name=Attic"]
