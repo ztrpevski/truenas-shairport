@@ -8,14 +8,14 @@ RUN mkdir -p /tmp
 # Install alsa-utils for alsamixer (using apk for Alpine Linux)
 RUN apk add --no-cache alsa-utils alsaconf alsa-utils-doc alsa-lib dbus
 
-RUN addgroup root audio
+#RUN addgroup root audio
     
 
 # Copy custom Shairport Sync configuration file (if you have one)
 COPY ./shairport-sync.conf /etc/shairport-sync.conf
 
 # Ensure ALSA sound card is accessible
-RUN mkdir -p /var/lib/alsa && touch /var/lib/alsa/asound.state
+#RUN mkdir -p /var/lib/alsa && touch /var/lib/alsa/asound.state
 
 # Grant access to ALSA sound device
 #VOLUME ["/dev/snd"]
