@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
   dbus \
   curl \
   libsqlite3-dev \
-  speaker-test \
+#  speaker-test \
   swh-plugins \
   && apt-get clean
 
