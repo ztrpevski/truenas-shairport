@@ -1,27 +1,34 @@
-#  Use the official Shairport Sync image as the base
-FROM mikebrady/shairport-sync:latest
+FROM debian:bullseye
 
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  git \
+  autoconf \
+  automake \
+  libtool \
+  libdaemon-dev \
+  libpopt-dev \
+  libconfig-dev \
+  libasound2-dev \
+  libssl-dev \
+  libsoxr-dev \
+  libavahi-client-dev \
+  avahi-daemon \
+  dbus \
+  curl \
+  libsqlite3-dev \
+  speaker-test \
+  swh-plugins \
+  && apt-get clean
 
-# Create necessary directories (for PulseAudio/PipeWire)
-RUN mkdir -p /tmp
+RUN git clone https://github.com/mikebrady/shairport-sync.git /shairport-sync
+WORKDIR /shairport-sync
+RUN autoreconf -i \
+ && ./configure --with-alsa --with-soxr --with-avahi --sysconfdir=/etc \
+ && make \
+ && make install
 
-# Install alsa-utils for alsamixer (using apk for Alpine Linux)
-RUN apk add --no-cache alsa-utils alsa-plugins alsaconf 
+COPY shairport-sync.conf /etc/shairport-sync.conf
+COPY asound.conf /etc/asound.conf
 
-#RUN addgroup root audio
-    
-
-# Copy custom Shairport Sync configuration file (if you have one)
-COPY ./shairport-sync.conf /etc/shairport-sync.conf
-
-# Ensure ALSA sound card is accessible
-#RUN mkdir -p /var/lib/alsa && touch /var/lib/alsa/asound.state
-
-# Grant access to ALSA sound device
-#VOLUME ["/dev/snd"]
-
-# Expose ports
-EXPOSE 5000 6001 6002 6003
-
-# Command to run Shairport Sync
-CMD ["shairport-sync", "-v", "--name=Attic"]
+CMD ["shairport-sync", "-c", "/etc/shairport-sync.conf", "-vv"]
