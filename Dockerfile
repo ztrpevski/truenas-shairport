@@ -31,4 +31,7 @@ RUN autoreconf -i \
 COPY shairport-sync.conf /etc/shairport-sync.conf
 COPY asound.conf /etc/asound.conf
 
-CMD ["shairport-sync", "-c", "/etc/shairport-sync.conf", "-vv"]
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
