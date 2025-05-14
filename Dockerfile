@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y \
   build-essential \
   git \
   autoconf \
+  alsa-utils \
+  libasound2-plugin-equal \
   automake \
   libtool \
   libdaemon-dev \
@@ -17,6 +19,7 @@ RUN apt-get update && apt-get install -y \
   dbus \
   curl \
   libsqlite3-dev \
+  vim \
 #  speaker-test \
   swh-plugins \
   && apt-get clean
