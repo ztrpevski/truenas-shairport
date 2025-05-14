@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
 RUN git clone https://github.com/mikebrady/shairport-sync.git /shairport-sync
 WORKDIR /shairport-sync
 RUN autoreconf -i \
- && ./configure --with-alsa --with-soxr --with-ssl=openssl --sysconfdir=/etc \
+ && ./configure --with-alsa --with-soxr --with-ssl=openssl --with-avahi  --sysconfdir=/etc \
  && make \
  && make install
 
