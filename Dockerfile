@@ -33,6 +33,8 @@ RUN autoreconf -i \
 
 COPY shairport-sync.conf /etc/shairport-sync.conf
 COPY asound.conf /etc/asound.conf
+RUN echo "source /etc/bash_completion" >> /root/.bashrc
+SHELL ["/bin/bash", "-c"]
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
