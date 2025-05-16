@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
   autoconf \
   alsa-utils \
   libasound2-plugin-equal \
+  ladspa-sdk \ 
   automake \
   libtool \
   libdaemon-dev \
