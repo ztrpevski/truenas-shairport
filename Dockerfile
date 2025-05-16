@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   ladspa-sdk \ 
   automake \
   libtool \
+  cmt \
   libdaemon-dev \
   libpopt-dev \
   libconfig-dev \
