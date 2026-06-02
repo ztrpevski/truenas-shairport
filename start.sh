@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Start avahi-daemon in the background
 service dbus start
 avahi-daemon --daemonize
